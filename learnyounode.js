@@ -9,6 +9,8 @@
 
 // console.log('HELLO WORLD')
 
+////////////////////////////Step 2
+
 // var numbers = process.argv;
 // var sum = 0;
 
@@ -21,11 +23,24 @@
 
 // console.log(sum);
 
+////////////////////////////Step 3
+
+// var fs = require('fs');
+
+// var file = fs.readFileSync(process.argv[2]);
+// var fileContents = file.toString();
+// var array = fileContents.split('\n');
+
+// console.log(array.length-1)
+
+////////////////////////////////Step 4
+
 var fs = require('fs');
 
-var file = fs.readFileSync(process.argv[2]);
-var fileContents = file.toString();
-var array = fileContents.split('\n');
-
-console.log(array.length-1)
+var file = fs.readFile(process.argv[2], function(error, data) {
+  
+  var fileContents = data.toString();
+  var array = fileContents.split('\n');
+  console.log(array.length -1)
+});
 
