@@ -7,4 +7,16 @@
 
 // server.listen(8000);
 
-console.log('HELLO WORLD')
+// console.log('HELLO WORLD')
+
+var numbers = process.argv;
+var sum = 0;
+
+for (i=0; i < numbers.length; i++) {
+  var integer = parseInt(numbers[i])
+  if (!isNaN(integer)) {
+    sum += parseInt(integer);
+  }
+}
+
+console.log(sum);
