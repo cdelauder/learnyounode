@@ -35,12 +35,24 @@
 
 ////////////////////////////////Step 4
 
-var fs = require('fs');
+// var fs = require('fs');
 
-var file = fs.readFile(process.argv[2], function(error, data) {
+// var file = fs.readFile(process.argv[2], function(error, data) {
   
-  var fileContents = data.toString();
-  var array = fileContents.split('\n');
-  console.log(array.length -1)
-});
+//   var fileContents = data.toString();
+//   var array = fileContents.split('\n');
+//   console.log(array.length -1)
+// });
 
+////////////////////////////////Step 5
+
+var fs = require('fs');
+var path = require('path')
+
+var file = fs.readdir(process.argv[2], function(error, files) {
+  for (i=0; i < files.length; i++) {
+    if (path.extname(files[i]) === '.'+process.argv[3]) {
+      console.log(files[i]);
+    }
+  }
+});
