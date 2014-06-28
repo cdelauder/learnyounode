@@ -9,14 +9,23 @@
 
 // console.log('HELLO WORLD')
 
-var numbers = process.argv;
-var sum = 0;
+// var numbers = process.argv;
+// var sum = 0;
 
-for (i=0; i < numbers.length; i++) {
-  var integer = parseInt(numbers[i])
-  if (!isNaN(integer)) {
-    sum += parseInt(integer);
-  }
-}
+// for (i=0; i < numbers.length; i++) {
+//   var integer = parseInt(numbers[i])
+//   if (!isNaN(integer)) {
+//     sum += parseInt(integer);
+//   }
+// }
 
-console.log(sum);
+// console.log(sum);
+
+var fs = require('fs');
+
+var file = fs.readFileSync(process.argv[2]);
+var fileContents = file.toString();
+var array = fileContents.split('\n');
+
+console.log(array.length-1)
+
