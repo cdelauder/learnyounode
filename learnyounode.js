@@ -67,9 +67,14 @@ var showThem = function(error, fileNames) {
   if (error !== null) {
     console.log(error)
   } else {
-    for (i=0; i < fileNames.length; i++) {
-    console.log(fileNames[i]);
-    }
+    displayResult(fileNames)
   }
 }
+
+var displayResult = function(fileNames) {
+  for (i=0; i < fileNames.length; i++) {
+  console.log(fileNames[i]);
+  }
+}
+
 module(process.argv[2], process.argv[3], showThem)
