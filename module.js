@@ -15,17 +15,30 @@ var run = function (directory, extension, callback) {
   })
 }
 
-var run = function (directory, extension, callback) {
-  var fs = require('fs');
-  var path = require('path');
-  var matchingFiles = [];
+// var run = (function (directory, extension, callback) {
+//   var fs = require('fs');
+//   var path = require('path');
+//   var matchingFiles = [];
 
-  var file = fs.readdir(directory, sortFiles(error, files))
+//   function sortFiles (error, files) {
+//     if (error)
+//       return callback(error);
+//     for (i=0; i < files.length; i++) {
+//       addFileName(files[i])
+//     }
+//     callback(null, matchingFiles)
+//   }
 
-  //check what this is, maybe thats why this wasn't working
-  //might need to prototype stuff
-  
-}
+//   function addFileName (file) {
+//     if (path.extname(files[i]) === '.'+extension) {
+//       matchingFiles.push(file)
+//     }
+//   }
+
+//   return {
+//     files = fs.readdir (directory, sortFiles(error, files))
+//   };
+// }) ();
 
 
 module.exports = run
