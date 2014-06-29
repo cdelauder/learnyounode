@@ -46,13 +46,30 @@
 
 ////////////////////////////////Step 5
 
-var fs = require('fs');
-var path = require('path')
+// var fs = require('fs');
+// var path = require('path')
 
-var file = fs.readdir(process.argv[2], function(error, files) {
-  for (i=0; i < files.length; i++) {
-    if (path.extname(files[i]) === '.'+process.argv[3]) {
-      console.log(files[i]);
+// var file = fs.readdir(process.argv[2], function(error, files) {
+//   for (i=0; i < files.length; i++) {
+//     if (path.extname(files[i]) === '.'+process.argv[3]) {
+//       console.log(files[i]);
+//     }
+//   }
+// });
+
+///////////////////////////////////Step 6
+
+var module = require('./module')
+
+
+
+var showThem = function(error, fileNames) {
+  if (error !== null) {
+    console.log(error)
+  } else {
+    for (i=0; i < fileNames.length; i++) {
+    console.log(fileNames[i]);
     }
   }
-});
+}
+module(process.argv[2], process.argv[3], showThem)
