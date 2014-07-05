@@ -59,22 +59,40 @@
 
 ///////////////////////////////////Step 6
 
-var module = require('./module')
+// var module = require('./module')
 
 
 
-var showThem = function(error, fileNames) {
-  if (error !== null) {
-    console.log(error)
-  } else {
-    displayResult(fileNames)
-  }
+// var showThem = function(error, fileNames) {
+//   if (error !== null) {
+//     console.log(error)
+//   } else {
+//     displayResult(fileNames)
+//   }
+// }
+
+// var displayResult = function(fileNames) {
+//   for (i=0; i < fileNames.length; i++) {
+//   console.log(fileNames[i]);
+//   }
+// }
+
+// module(process.argv[2], process.argv[3], showThem).initialize()
+
+
+//////////////////////////////////Step 7
+
+var server = require('http')
+
+var url = process.argv[2]
+
+server.get(url, callback)
+
+function callback (response) {
+  response.setEncoding('utf8')
+  response.on('data', dataCallback)
 }
 
-var displayResult = function(fileNames) {
-  for (i=0; i < fileNames.length; i++) {
-  console.log(fileNames[i]);
-  }
+function dataCallback (data) {
+  console.log(data)
 }
-
-module(process.argv[2], process.argv[3], showThem)
