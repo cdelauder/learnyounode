@@ -90,9 +90,18 @@ server.get(url, callback)
 
 function callback (response) {
   response.setEncoding('utf8')
+  evaluateResponse(response)
+}
+
+function evaluateResponse (response) {
   response.on('data', dataCallback)
+  response.on('error', errorCallback)
 }
 
 function dataCallback (data) {
   console.log(data)
+}
+
+function errorCallback (error) {
+  console.log(error)
 }
