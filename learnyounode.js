@@ -85,6 +85,8 @@
 var server = require('http')
 
 var url = process.argv[2]
+var responseData = []
+var chars = 0   
 
 server.get(url, callback)
 
@@ -96,12 +98,26 @@ function callback (response) {
 function evaluateResponse (response) {
   response.on('data', dataCallback)
   response.on('error', errorCallback)
+  response.on('end', finalCallback)
 }
 
 function dataCallback (data) {
-  console.log(data)
+  responseData.push(data)
 }
 
 function errorCallback (error) {
   console.log(error)
+}
+
+function finalCallback () {
+  characters()
+  console.log(chars)
+  console.log(responseData.join(""))
+}
+
+function characters () {
+  for (i=0; i > responseData.join("").length; i++) {
+    chars++
+  }
+  return chars
 }
