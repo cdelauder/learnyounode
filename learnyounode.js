@@ -82,13 +82,58 @@
 
 //////////////////////////////////Step 7
 
+// var server = require('http')
+
+// var url = process.argv[2]
+// var responseData = []
+// var chars = 0   
+
+// server.get(url, callback)
+
+// function callback (response) {
+//   response.setEncoding('utf8')
+//   evaluateResponse(response)
+// }
+
+// function evaluateResponse (response) {
+//   response.on('data', dataCallback)
+//   response.on('error', errorCallback)
+//   response.on('end', finalCallback)
+// }
+
+// function dataCallback (data) {
+//   responseData.push(data)
+// }
+
+// function errorCallback (error) {
+//   console.log(error)
+// }
+
+// function finalCallback () {
+//   console.log(characters())
+//   console.log(responseData.join(""))
+// }
+
+// function characters () {
+//   for (i=0; i < responseData.join("").length; i++) {
+//     chars++
+//   }
+//   return chars
+// }
+
+
+////////////////////////////////////Step 8
 var server = require('http')
 
-var url = process.argv[2]
-var responseData = []
-var chars = 0   
+var url = process.argv.splice(2,3)
 
-server.get(url, callback)
+var responses = []
+
+function makeRequests () {
+  for (i=0; i < url.length; i++) {
+    server.get(url[i], callback)
+  }
+}
 
 function callback (response) {
   response.setEncoding('utf8')
@@ -102,7 +147,7 @@ function evaluateResponse (response) {
 }
 
 function dataCallback (data) {
-  responseData.push(data)
+  responses.push(data)
 }
 
 function errorCallback (error) {
@@ -110,13 +155,10 @@ function errorCallback (error) {
 }
 
 function finalCallback () {
-  console.log(characters())
-  console.log(responseData.join(""))
+  console.log(responses.join(""))
+  if (responses.length === 3) {
+    console.log(responses.join(""))
+  }
 }
 
-function characters () {
-  for (i=0; i < responseData.join("").length; i++) {
-    chars++
-  }
-  return chars
-}
+makeRequests()
