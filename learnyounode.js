@@ -110,13 +110,12 @@ function errorCallback (error) {
 }
 
 function finalCallback () {
-  characters()
-  console.log(responseData.length)
+  console.log(characters())
   console.log(responseData.join(""))
 }
 
 function characters () {
-  for (i=0; i > responseData.join("").length; i++) {
+  for (i=0; i < responseData.join("").length; i++) {
     chars++
   }
   return chars
