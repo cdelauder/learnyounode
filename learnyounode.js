@@ -111,7 +111,7 @@ function errorCallback (error) {
 
 function finalCallback () {
   characters()
-  console.log(chars)
+  console.log(responseData.length)
   console.log(responseData.join(""))
 }
 
