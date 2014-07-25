@@ -9,7 +9,7 @@
 
 // console.log('HELLO WORLD')
 
-////////////////////////////Step 2
+////////////////////////////Step 3
 
 // var numbers = process.argv;
 // var sum = 0;
@@ -23,7 +23,7 @@
 
 // console.log(sum);
 
-////////////////////////////Step 3
+////////////////////////////Step 4
 
 // var fs = require('fs');
 
@@ -33,7 +33,7 @@
 
 // console.log(array.length-1)
 
-////////////////////////////////Step 4
+////////////////////////////////Step 5
 
 // var fs = require('fs');
 
@@ -44,7 +44,7 @@
 //   console.log(array.length -1)
 // });
 
-////////////////////////////////Step 5
+////////////////////////////////Step 6
 
 // var fs = require('fs');
 // var path = require('path')
@@ -57,7 +57,7 @@
 //   }
 // });
 
-///////////////////////////////////Step 6
+///////////////////////////////////Step 7
 
 // var module = require('./module')
 
@@ -80,7 +80,7 @@
 // module(process.argv[2], process.argv[3], showThem).initialize()
 
 
-//////////////////////////////////Step 7
+//////////////////////////////////Step 8
 
 // var server = require('http')
 
@@ -122,32 +122,33 @@
 // }
 
 
-////////////////////////////////////Step 8
+////////////////////////////////////Step 9
 var server = require('http')
 
 var url = process.argv.splice(2,3)
 
-var responses = []
+var responses = [[],[],[]]
+var counter = 0
 
 function makeRequests () {
-  for (i=0; i < url.length; i++) {
-    server.get(url[i], callback)
+  for (var i=0; i < url.length; i++) {
+    server.get(url[i], callback.bind(null, i))
   }
 }
 
-function callback (response) {
+function callback (i, response) {
   response.setEncoding('utf8')
-  evaluateResponse(response)
+  evaluateResponse(response, i)
 }
 
-function evaluateResponse (response) {
-  response.on('data', dataCallback)
+function evaluateResponse (response, i) {
+  response.on('data', dataCallback.bind(null, i))
   response.on('error', errorCallback)
   response.on('end', finalCallback)
 }
 
-function dataCallback (data) {
-  responses.push(data)
+function dataCallback (i, data) {
+  responses[i].push(data)
 }
 
 function errorCallback (error) {
@@ -155,9 +156,11 @@ function errorCallback (error) {
 }
 
 function finalCallback () {
-  console.log(responses.join(""))
-  if (responses.length === 3) {
-    console.log(responses.join(""))
+  counter++
+  if (counter === 3) {
+    for (var i=0; i < 3; i++) {
+      console.log(responses[i].join(""))
+    }
   }
 }
 
