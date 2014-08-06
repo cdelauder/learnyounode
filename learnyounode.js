@@ -123,45 +123,68 @@
 
 
 ////////////////////////////////////Step 9
-var server = require('http')
+// var server = require('http')
 
-var url = process.argv.splice(2,3)
+// var url = process.argv.splice(2,3)
 
-var responses = [[],[],[]]
-var counter = 0
+// var responses = [[],[],[]]
+// var counter = 0
 
-function makeRequests () {
-  for (var i=0; i < url.length; i++) {
-    server.get(url[i], callback.bind(null, i))
-  }
+// function makeRequests () {
+//   for (var i=0; i < url.length; i++) {
+//     server.get(url[i], callback.bind(null, i))
+//   }
+// }
+
+// function callback (i, response) {
+//   response.setEncoding('utf8')
+//   evaluateResponse(response, i)
+// }
+
+// function evaluateResponse (response, i) {
+//   response.on('data', dataCallback.bind(null, i))
+//   response.on('error', errorCallback)
+//   response.on('end', finalCallback)
+// }
+
+// function dataCallback (i, data) {
+//   responses[i].push(data)
+// }
+
+// function errorCallback (error) {
+//   console.log(error)
+// }
+
+// function finalCallback () {
+//   counter++
+//   if (counter === 3) {
+//     for (var i=0; i < 3; i++) {
+//       console.log(responses[i].join(""))
+//     }
+//   }
+// }
+
+// makeRequests()
+
+////////////////////////////////////////Step 10
+
+var net = require('net')
+var timeServer = net.createServer(serverListener)
+var date = new Date()
+
+function serverListener(socket) {
+  socket.write(time())
+  socket.end()
 }
 
-function callback (i, response) {
-  response.setEncoding('utf8')
-  evaluateResponse(response, i)
+function time() {
+  var currentTime = []
+    currentTime.push(date.getFullYear())
+    currentTime.push(date.getMonth())
+    currentTime.push(date.getDate())
+    currentTime.push(date.getHours())
+    currentTime.push(date.getMinutes())
+  return currentTime.join(" ")
 }
 
-function evaluateResponse (response, i) {
-  response.on('data', dataCallback.bind(null, i))
-  response.on('error', errorCallback)
-  response.on('end', finalCallback)
-}
-
-function dataCallback (i, data) {
-  responses[i].push(data)
-}
-
-function errorCallback (error) {
-  console.log(error)
-}
-
-function finalCallback () {
-  counter++
-  if (counter === 3) {
-    for (var i=0; i < 3; i++) {
-      console.log(responses[i].join(""))
-    }
-  }
-}
-
-makeRequests()
+timeServer.listen(process.argv[2])
