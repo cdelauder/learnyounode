@@ -174,17 +174,11 @@ var date = new Date()
 
 function serverListener(socket) {
   socket.write(time())
-  socket.end()
+  socket.end(data)
 }
 
 function time() {
-  var currentTime = []
-    currentTime.push(date.getFullYear())
-    currentTime.push(date.getMonth())
-    currentTime.push(date.getDate())
-    currentTime.push(date.getHours())
-    currentTime.push(date.getMinutes())
-  return currentTime.join(" ")
+  return date.getFullYear() + '-0' + (date.getMonth()+1) + '-0' + date.getDate() + ' ' + date.getHours() + ':0' + date.getMinutes()
 }
 
 timeServer.listen(process.argv[2])
