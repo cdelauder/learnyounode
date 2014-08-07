@@ -168,17 +168,30 @@
 
 ////////////////////////////////////////Step 10
 
-var net = require('net')
-var timeServer = net.createServer(serverListener)
-var date = new Date()
+// var net = require('net')
+// var timeServer = net.createServer(serverListener)
+// var date = new Date()
 
-function serverListener(socket) {
-  socket.write(time())
-  socket.end(data)
+// function serverListener(socket) {
+//   socket.write(time())
+//   socket.end(data)
+// }
+
+// function time() {
+//   return date.getFullYear() + '-0' + (date.getMonth()+1) + '-0' + date.getDate() + ' ' + date.getHours() + ':0' + date.getMinutes()
+// }
+
+// timeServer.listen(process.argv[2])
+
+/////////////////////////////////////////Step 11
+
+var http = require('http')
+var fileServer = http.createServer(streamer)
+
+function streamer(request, response) {
+  console.log(request)
+  console.log(response)
 }
 
-function time() {
-  return date.getFullYear() + '-0' + (date.getMonth()+1) + '-0' + date.getDate() + ' ' + date.getHours() + ':0' + date.getMinutes()
-}
+fileServer.listen(process.argv[2])
 
-timeServer.listen(process.argv[2])
