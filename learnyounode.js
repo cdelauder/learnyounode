@@ -185,13 +185,30 @@
 
 /////////////////////////////////////////Step 11
 
+// var http = require('http')
+// var fs = require('fs')
+// var fileServer = http.createServer(streamer)
+
+// function streamer(request, response) {
+//   fs.createReadStream(process.argv[3]).pipe(response)
+// }
+
+// fileServer.listen(process.argv[2])
+
+/////////////////////////////////////////Step 12
+
 var http = require('http')
 var fs = require('fs')
-var fileServer = http.createServer(streamer)
+var fileServer = http.createServer(uppercase)
+var map = require('through2-map')
 
-function streamer(request, response) {
-  fs.createReadStream(process.argv[3]).pipe(response)
+
+function uppercase(request, response) {
+  request.pipe(map(convertCase)).pipe(response)
+}
+
+function convertCase(chunk) {
+  return chunk.toString().toUpperCase()
 }
 
 fileServer.listen(process.argv[2])
-
