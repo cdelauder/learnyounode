@@ -233,12 +233,28 @@ function api(request, response) {
 
 function unixTime(request, response, time) {
   response.writeHead(200, { 'Content-Type': 'application/json' })
-  response.end(time)
+  response.end(JSON.stringify(unixTimeMaker(time)))
 }
 
 function isoTime(request, response, time) {
   response.writeHead(200, { 'Content-Type': 'application/json' })
-  response.end(JSON.stringify(time))
+  response.end(JSON.stringify(isoTimeMaker(time)))
+}
+
+function isoTimeMaker (oldtime) {
+  var time = new Date(oldtime)
+  return {
+    hour: time.getHours(),
+    minute: time.getMinutes(),
+    second: time.getSeconds()
+  }
+}
+
+function unixTimeMaker (oldtime) {
+  var time = new Date(oldtime)
+  return {
+    unixtime: time.getTime()
+  }
 }
 
 server.listen(process.argv[2])
