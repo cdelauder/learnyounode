@@ -222,22 +222,23 @@ var url = require('url')
 function api(request, response) {
   var path = url.parse(request.url, true)
   if (path.pathname === '/api/unixtime') {
-    unixTime(request, response, path.query)
+    unixTime(request, response, path.query.iso)
   } else if (path.pathname === '/api/parsetime') {
-    isoTime(request, response, path.query)
+    isoTime(request, response, path.query.iso)
   } else {
+    response.writeHead(404)
     response.end('not a real route')
   }
 }
 
 function unixTime(request, response, time) {
-  console.log(time)
   response.writeHead(200, { 'Content-Type': 'application/json' })
-  time.pipe(response)
+  response.end(time)
 }
 
 function isoTime(request, response, time) {
   response.writeHead(200, { 'Content-Type': 'application/json' })
+  response.end(JSON.stringify(time))
 }
 
 server.listen(process.argv[2])
