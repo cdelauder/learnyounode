@@ -197,18 +197,47 @@
 
 /////////////////////////////////////////Step 12
 
+// var http = require('http')
+// var fs = require('fs')
+// var fileServer = http.createServer(uppercase)
+// var map = require('through2-map')
+
+
+// function uppercase(request, response) {
+//   request.pipe(map(convertCase)).pipe(response)
+// }
+
+// function convertCase(chunk) {
+//   return chunk.toString().toUpperCase()
+// }
+
+// fileServer.listen(process.argv[2])
+
+////////////////////////////////////////////step 13
+
 var http = require('http')
-var fs = require('fs')
-var fileServer = http.createServer(uppercase)
-var map = require('through2-map')
+var server = http.createServer(api)
+var url = require('url')
 
-
-function uppercase(request, response) {
-  request.pipe(map(convertCase)).pipe(response)
+function api(request, response) {
+  var path = url.parse(request.url, true)
+  if (path.pathname === '/api/unixtime') {
+    unixTime(request, response, path.query)
+  } else if (path.pathname === '/api/parsetime') {
+    isoTime(request, response, path.query)
+  } else {
+    response.end('not a real route')
+  }
 }
 
-function convertCase(chunk) {
-  return chunk.toString().toUpperCase()
+function unixTime(request, response, time) {
+  console.log(time)
+  response.writeHead(200, { 'Content-Type': 'application/json' })
+  time.pipe(response)
 }
 
-fileServer.listen(process.argv[2])
+function isoTime(request, response, time) {
+  response.writeHead(200, { 'Content-Type': 'application/json' })
+}
+
+server.listen(process.argv[2])
