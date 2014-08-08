@@ -186,11 +186,11 @@
 /////////////////////////////////////////Step 11
 
 var http = require('http')
+var fs = require('fs')
 var fileServer = http.createServer(streamer)
 
 function streamer(request, response) {
-  console.log(request)
-  console.log(response)
+  fs.createReadStream(process.argv[3]).pipe(response)
 }
 
 fileServer.listen(process.argv[2])
