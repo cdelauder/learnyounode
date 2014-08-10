@@ -14,10 +14,12 @@
 ///////////////////////////////step 4
 
 var through = require('through');
-var tr = through(write, end);
-process.stdin.pipe(tr).pipe(process.stdout);
-tr.write();
-tr.end();
+var tr = through(converter)
 
-function write (buf) { this.queue(buf) }
-function end () { console.log(this.queue()) }
+function converter(buf) {
+  this.queue(buf.toString().toUpperCase())
+}
+
+process.stdin.pipe(tr).pipe(process.stdout);
+
+
