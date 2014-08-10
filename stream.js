@@ -13,13 +13,31 @@
 
 ///////////////////////////////step 4
 
-var through = require('through');
+// var through = require('through');
+// var tr = through(converter)
+
+// function converter(buf) {
+//   this.queue(buf.toString().toUpperCase())
+// }
+
+// process.stdin.pipe(tr).pipe(process.stdout);
+
+////////////////////////////////////step 5
+
+var split = require('split')
+var through = require('through')
 var tr = through(converter)
 
-function converter(buf) {
-  this.queue(buf.toString().toUpperCase())
+function converter(line) {
+  var counter = 1
+  if (counter % 2 === 0) {
+  console.dir(line.toUpperCase())
+  } else {
+  console.dir(line.toLowerCase())
+  }
+  counter++
 }
 
-process.stdin.pipe(tr).pipe(process.stdout);
+process.stdin.pipe(split()).pipe(tr).pipe(process.stdout)
 
 
