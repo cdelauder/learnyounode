@@ -15,9 +15,9 @@
 
 var through = require('through');
 var tr = through(write, end);
-tr.write('beep\n');
-tr.write('boop\n');
+process.stdin.pipe(tr).pipe(process.stdout);
+tr.write();
 tr.end();
 
-function write (buf) { console.dir(buf) }
-function end () { console.log('__END__') }
+function write (buf) { this.queue(buf) }
+function end () { console.log(this.queue()) }
