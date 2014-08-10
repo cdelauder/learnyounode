@@ -31,9 +31,9 @@ var tr = through(converter)
 function converter(line) {
   var counter = 1
   if (counter % 2 === 0) {
-  console.dir(line.toUpperCase())
+  console.dir(line.toString().toUpperCase())
   } else {
-  console.dir(line.toLowerCase())
+  console.dir(line.toString().toLowerCase())
   }
   counter++
 }
