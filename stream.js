@@ -27,13 +27,13 @@
 var split = require('split')
 var through = require('through')
 var tr = through(converter)
+var counter = 1
 
 function converter(line) {
-  var counter = 1
   if (counter % 2 === 0) {
-  console.dir(line.toString().toUpperCase())
+  this.queue(line.toString().toUpperCase())
   } else {
-  console.dir(line.toString().toLowerCase())
+  this.queue(line.toString().toLowerCase())
   }
   counter++
 }
