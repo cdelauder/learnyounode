@@ -31,9 +31,9 @@ var counter = 1
 
 function converter(line) {
   if (counter % 2 === 0) {
-  this.queue(line.toString().toUpperCase())
+  console.log(line.toString().toUpperCase())
   } else {
-  this.queue(line.toString().toLowerCase())
+  console.log(line.toString().toLowerCase())
   }
   counter++
 }
