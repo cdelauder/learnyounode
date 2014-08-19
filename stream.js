@@ -24,20 +24,34 @@
 
 ////////////////////////////////////step 5
 
-var split = require('split')
-var through = require('through')
-var tr = through(converter)
-var counter = 1
+// var split = require('split')
+// var through = require('through')
+// var tr = through(converter)
+// var counter = 1
 
-function converter(line) {
-  if (counter % 2 === 0) {
-  console.log(line.toString().toUpperCase())
-  } else {
-  console.log(line.toString().toLowerCase())
-  }
-  counter++
+// function converter(line) {
+//   if (counter % 2 === 0) {
+//   console.log(line.toString().toUpperCase())
+//   } else {
+//   console.log(line.toString().toLowerCase())
+//   }
+//   counter++
+// }
+
+// process.stdin.pipe(split()).pipe(tr).pipe(process.stdout)
+
+
+///////////////////////////////////step 6
+
+
+var concate = require('concat-stream')
+
+function concater (data) {
+  console.log(data..toString()reverse())
 }
 
-process.stdin.pipe(split()).pipe(tr).pipe(process.stdout)
+process.stdin.pipe(concater).pipe(process.stdout)
+
+
 
 
