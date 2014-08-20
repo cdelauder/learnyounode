@@ -74,8 +74,14 @@
 
 /////////////////////////////////////////////step 8
 
-var request = require('request')
+// var request = require('request')
 
-var stream = request.post('http://localhost:8000')
+// var stream = request.post('http://localhost:8000')
 
-process.stdin.pipe(stream).pipe(process.stdout)
+// process.stdin.pipe(stream).pipe(process.stdout)
+
+//////////////////////////////////////////////step 9
+
+var ws = require('websocket-stream')
+var stream = ws('ws://localhost:8000')
+stream.end('hello\n')
