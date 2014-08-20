@@ -43,15 +43,33 @@
 
 ///////////////////////////////////step 6
 
-var concat = require('concat-stream');
+// var concat = require('concat-stream');
 
-function concater (buf) {
-  var string = buf.toString().split("").reverse().join("")
-  console.log(string);
+// function concater (buf) {
+//   var string = buf.toString().split("").reverse().join("")
+//   console.log(string);
+// }
+
+// process.stdin.pipe( concat(concater));
+
+////////////////////////////////////step 7
+
+var http = require('http')
+var through = require('through')
+var tr = through(converter)
+var server = http.createServer(serverCallback)
+
+function serverCallback(request, response) {
+  if (request.method === 'POST') {
+    request.pipe(tr).pipe(response)
+  }
+  
 }
 
-process.stdin.pipe( concat(concater));
+function converter(buf) {
+  buf.toString().toUpperCase()
+}
 
-
+server.listen(process.argv[2])
 
 
