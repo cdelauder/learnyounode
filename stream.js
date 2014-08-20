@@ -44,13 +44,11 @@
 ///////////////////////////////////step 6
 
 
-var concate = require('concat-stream')
+var concat = require('concat-stream')
 
-function concater (data) {
-  console.log(data..toString()reverse())
-}
-
-process.stdin.pipe(concater).pipe(process.stdout)
+process.stdin.pipe( concat(function(data) {
+  console.log(data.toString())
+}))
 
 
 
