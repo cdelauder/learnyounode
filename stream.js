@@ -54,22 +54,28 @@
 
 ////////////////////////////////////step 7
 
-var http = require('http')
-var through = require('through')
-var tr = through(converter)
-var server = http.createServer(serverCallback)
+// var http = require('http')
+// var through = require('through')
+// var tr = through(converter)
+// var server = http.createServer(serverCallback)
 
-function serverCallback(request, response) {
-  if (request.method === 'POST') {
-    request.pipe(tr).pipe(response)
-  }
+// function serverCallback(request, response) {
+//   if (request.method === 'POST') {
+//     request.pipe(tr).pipe(response)
+//   }
   
-}
+// }
 
-function converter(buf) {
-  buf.toString().toUpperCase()
-}
+// function converter(buf) {
+//   buf.toString().toUpperCase()
+// }
 
-server.listen(process.argv[2])
+// server.listen(process.argv[2])
 
+/////////////////////////////////////////////step 8
 
+var request = require('request')
+
+var stream = request.post('http://localhost:8000')
+
+process.stdin.pipe(stream).pipe(process.stdout)
