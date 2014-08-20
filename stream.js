@@ -44,11 +44,13 @@
 ///////////////////////////////////step 6
 
 var concat = require('concat-stream');
-var esrever = require('esrever');
 
-process.stdin.pipe( concat(function(buf) {
-        console.log(esrever.reverse(buf.toString()));
-    }));
+function concater (buf) {
+  var string = buf.toString().split("").reverse().join("")
+  console.log(string);
+}
+
+process.stdin.pipe( concat(concater));
 
 
 
