@@ -106,6 +106,7 @@ var spawn = require('child_process').spawn
 var duplex = require('duplexer')
 
 module.exports = function (cmd, args) {
-  duplex(process.stdin, process.stdout) 
+  var info = spawn(cmd, args)
+  return duplex(info.stdin, info.stdout) 
 }
 
