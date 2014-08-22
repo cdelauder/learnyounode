@@ -89,16 +89,23 @@
 
 /////////////////////////////////////////////step 10
 
-var trumpet = require('trumpet')
-var through = require('through')
-var tr = trumpet()
+// var trumpet = require('trumpet')
+// var through = require('through')
+// var tr = trumpet()
 
-var loud = tr.select('.loud').createStream()
-loud.pipe(through(function (buf) {
-  this.queue(buf.toString().toUpperCase())
-})).pipe(loud)
+// var loud = tr.select('.loud').createStream()
+// loud.pipe(through(function (buf) {
+//   this.queue(buf.toString().toUpperCase())
+// })).pipe(loud)
 
-process.stdin.pipe(tr).pipe(process.stdout)
+// process.stdin.pipe(tr).pipe(process.stdout)
 
+///////////////////////////////////////////////step 11
 
+var spawn = require('child_process').spawn
+var duplex = require('duplexer')
+
+module.exports = function (cmd, args) {
+  duplex(process.stdin, process.stdout) 
+}
 
