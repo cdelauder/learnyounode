@@ -90,13 +90,13 @@
 /////////////////////////////////////////////step 10
 
 var trumpet = require('trumpet')
-var tr = trumpet()
 var through = require('through')
+var tr = trumpet()
 
-var stream = tr.select('loud').createStream()
-stream.pipe(through(function(buffer) {
-  this.queue(buffer.toString().toUpperCase())
-})).pipe(stream)
+var loud = tr.select('.loud').createStream()
+loud.pipe(through(function (buf) {
+  this.queue(buf.toString().toUpperCase())
+})).pipe(loud)
 
 process.stdin.pipe(tr).pipe(process.stdout)
 
