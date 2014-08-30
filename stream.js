@@ -102,11 +102,30 @@
 
 ///////////////////////////////////////////////step 11
 
-var spawn = require('child_process').spawn
-var duplex = require('duplexer')
+// var spawn = require('child_process').spawn
+// var duplex = require('duplexer')
 
-module.exports = function (cmd, args) {
-  var info = spawn(cmd, args)
-  return duplex(info.stdin, info.stdout) 
-}
+// module.exports = function (cmd, args) {
+//   var info = spawn(cmd, args)
+//   return duplex(info.stdin, info.stdout) 
+// }
+
+////////////////////////////////////////////////step 12
+
+var duplex = require('duplexer')
+var through = require('through')
+
+module.exports = function (counter) {
+  var counts = {};
+  var input = through(write, end);
+  return duplex(input, counter);
+  
+  function write (row) {
+    counts[row.country] = (counts[row.country] || 0) + 1;
+  }
+
+  function end () { counter.setCounts(counts) }
+  
+};
+
 
