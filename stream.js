@@ -112,20 +112,26 @@
 
 ////////////////////////////////////////////////step 12
 
-var duplex = require('duplexer')
-var through = require('through')
+// var duplex = require('duplexer')
+// var through = require('through')
 
-module.exports = function (counter) {
-  var counts = {};
-  var input = through(write, end);
-  return duplex(input, counter);
+// module.exports = function (counter) {
+//   var counts = {};
+//   var input = through(write, end);
+//   return duplex(input, counter);
   
-  function write (row) {
-    counts[row.country] = (counts[row.country] || 0) + 1;
-  }
+//   function write (row) {
+//     counts[row.country] = (counts[row.country] || 0) + 1;
+//   }
 
-  function end () { counter.setCounts(counts) }
-  
-};
+//   function end () { counter.setCounts(counts) }
 
+// };
 
+////////////////////////////////////////////////step 13
+
+var combine = require('stream-combiner')
+
+module.exports = function () {
+  return combine()
+}
