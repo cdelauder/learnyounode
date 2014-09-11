@@ -167,8 +167,7 @@
 
 var crypto = require('crypto');
 var stream = crypto.createDecipher('aes256', process.argv[2]);  
-stream.pipe(process.stdin)
-stream.pipe(process.stdout);
-stream.end();
+process.stdin.pipe(stream).pipe(process.stdout)
+
 
 
